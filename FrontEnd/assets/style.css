@@ -46,17 +46,32 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/** end reset css**/
+/** END RESET CSS**/
+
+:root {
+	--primary-color: #1D6154;
+	--secondary-color: #0E2F28;
+	--primary-text-color: #3D3D3D;
+	--secondary-text-color: #000;
+	--background-color: #FFFEF8;
+	--logo-color: #B1663C;
+}
+
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: var(--background-color);
+}
+
+main {
+	max-width: 1140px;
+	margin: 8vw 15vw;
+		margin-bottom: 0;
 }
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 2vw 8vw;
 }
 section {
 	margin: 50px 0
@@ -68,7 +83,7 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--logo-color)
 }
 
 h1 > span {
@@ -82,38 +97,56 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--primary-color)
 }
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+	gap: 20px;
 
 }
 nav li {
 	padding: 0 10px;
-	font-size: 1.2em;
+	font-size: 1em;
+	line-height: 1.2em;
+	font-weight: 400;
+}
+
+nav img {
+	width: 20px;
+	height: auto;
 }
 
 li:hover {
-	color: #B1663C;
+	color: var(--logo-color)
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
-}
-#introduction figure {
-	flex: 1
-}
-#introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+	width: 100%;
+	justify-content: space-between;
+	margin: 0;
 }
 
 #introduction article {
-	flex: 1
+	flex: 0 0 40%;
+	max-width: 40%;
+	text-align: left;
+  }
+  
+  #introduction figure {
+	flex: 0 0 50%;
+	max-width: 50%;
+  }
+
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 100%;
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -121,6 +154,37 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#portfolio {
+	margin-top: 12vh;
+}
+
+.filter-bar {
+	display: flex;
+  	justify-content: center;
+  	margin-bottom: 4vh;
+	gap: 20px;
+}
+
+.filter-button {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: 2px solid var(--primary-color);
+	background-color: white;
+	border-radius: 20px;
+	font-family: "syne";
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	color: var(--primary-color);
+}
+
+.filter-button:hover {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -133,38 +197,43 @@ li:hover {
 	grid-row-gap: 20px;
 }
 
+.gallery figcaption {
+	margin-top: 8px
+}
+
 .gallery img {
 	width: 100%;
 
 }
-#contact {
+#contact, #login {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact, #login > * {
 	text-align: center;
 
 }
 #contact h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact, #login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact, #login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact, #login label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+
+#contact, #login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -173,16 +242,38 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
+	background-color: var(--primary-color);
+	margin: 2em auto;
+	margin-bottom: 15px;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+}
+
+#login input[type="submit"]{
+
+}
+
+#login a {
+	color: black;
+	display: block;
+	align-items: center;
+	margin-top: 20px;
+}
+
+
+footer {
+	background-color: white;
+	height: 5vh;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+footer nav li {
+	margin-top: 23px
 }
 
