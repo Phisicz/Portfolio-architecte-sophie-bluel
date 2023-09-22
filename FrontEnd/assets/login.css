@@ -61,15 +61,13 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: var(--background-color);
-	overflow-x: hidden;
 }
 
 main {
 	max-width: 1140px;
 	margin: 8vw 15vw;
-		margin-bottom: 0;
+	margin-bottom: 0;
 }
-
 header {
 	display: flex;
 	justify-content: space-between;
@@ -124,119 +122,35 @@ li:hover {
 	color: var(--logo-color)
 }
 
-#introduction {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	justify-content: space-between;
-	margin: 0;
-}
-
-#introduction article {
-	flex: 0 0 40%;
-	max-width: 40%;
-	text-align: left;
-  }
-  
-  #introduction figure {
-	flex: 0 0 50%;
-	max-width: 50%;
-  }
-
-#introduction img {
-	display: block;
-	margin: auto;
-	width: 100%;
-}
-
-#introduction h2 {
-	margin-bottom: 1em;
-}
-
-#introduction p {
-	margin-bottom: 0.5em;
-}
-
-#portfolio {
-	margin-top: 12vh;
-}
-
-.filter-bar {
-	display: flex;
-  	justify-content: center;
-	flex-wrap: wrap;
-  	margin-bottom: 4vh;
-	gap: 20px;
-}
-
-.filter-button {
-	padding: 10px 15px;
-	cursor: pointer;
-	border: 2px solid var(--primary-color);
-	background-color: white;
-	border-radius: 20px;
-	font-family: "syne";
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 19px;
-	color: var(--primary-color);
-}
-
-.filter-button:hover {
-	background-color: var(--primary-color);
-	color: white;
-}
-
-
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
-.gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}
-
-.gallery figcaption {
-	margin-top: 8px
-}
-
-.gallery img {
-	width: 100%;
-
-}
-
-#contact {
+#login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#login > * {
 	text-align: center;
 
 }
-#contact h2{
+#login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#login label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -253,6 +167,13 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+#login a {
+	color: black;
+	display: block;
+	align-items: center;
+	margin-top: 20px;
+}
+
 footer {
 	background-color: white;
 	height: 5vh;
@@ -267,90 +188,4 @@ footer nav ul {
 footer nav li {
 	margin-top: 23px
 }
-
-/******** MEDIA QUERIES ********/
-
-/* Medium devices (tablets, less/equal than 1024px) */
-@media (max-width: 1024px) {
-
-    #introduction {
-		display: inline-block;
-	}
-
-	#introduction figure {
-		max-width: 100%;
-		margin: auto;
-	}
-
-	#introduction img {
-	}
-
-	#introduction article {
-		max-width: 100%;
-		padding-top: 50px;
-		text-align: justify;
-	}
-
-	#portfolio {
-		margin: 0;
-		padding-top: 50px;
-	}
-
-	.filter-button {
-		width: calc(50% - 20px)
-	}
-
-	.gallery {
-		padding-bottom: 50px;
-	}
-
-}
-
-/* Small devices (phones, less than 768px) */
-@media (max-width: 768px) {
-
-	main {
-		margin: 8vw 0;
-	}
-
-	.padding-sides-mobile {
-		padding-left: 8vw;
-		padding-right: 8vw;
-	}
-
-	.header-container {
-		text-align: center;
-	}
-
-	header {
-		display: inline;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-	}
-
-	header h1 {
-		padding-bottom: 20px;
-	}
-
-	.filter-bar {
-        flex-direction: column;
-		gap: 10px;
-    }
-
-    .filter-button {
-        width: 100%;
-    }
-
-	.gallery {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	#contact {
-		width: 100%;
-	}
-}
-
 
