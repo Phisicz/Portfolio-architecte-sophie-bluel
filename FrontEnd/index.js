@@ -2,6 +2,7 @@
 async function recupererTravaux() {
   const response = await fetch('http://localhost:5678/api/works');
   const data = await response.json();
+  // return data
 }
 
 // Fonction pour filtrer les images en fonction de la catégorie //
@@ -19,6 +20,7 @@ function filterImages(category) {
 
 // Boutons des catégories afin de filtrer les images //
 
+// refactoriser
 // Bouton Tous
 const allButton = document.querySelector('.filter-button[data-filter="all"]');
 allButton.addEventListener("click", () => {
@@ -46,6 +48,8 @@ hotelsCategory.addEventListener("click", () => {
   console.log("Bouton 'Hotels' cliqué");
   filterImages("hotels");
 });
+
+//fin refactorisation
 
 // Sélectionner la popup
 const popup = document.querySelector('.popup-overlay');

@@ -4,6 +4,7 @@ const Categories = db.categories
 exports.findAll = async (req, res) =>  {
 	try{
 		const works = await Categories.findAll();
+		
 		return res.status(200).json(works);
 	}catch(err){
 		return res.status(500).json({ error: new Error('Something went wrong')})
