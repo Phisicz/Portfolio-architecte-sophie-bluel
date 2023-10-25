@@ -12,53 +12,88 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="/FrontEnd/assets/style.css">
-	<script defer src="/FrontEnd/works.js"></script>
-	<script defer src="/FrontEnd/works.js"></script>
+	<script defer src="/FrontEnd/index.js"></script>
+	<script defer src="/FrontEnd/login.js"></script>
 </head>
 
 <body>
 	<div class="popup-overlay">
 		<div class="popup-container">
-			<div class="popup-wrapper">
-					<h3>Galerie photo</h3>
-					<div class="popup-grid">
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-						<div class="popup-card">
-							<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-							<i class="fa-solid fa-trash-can"></i>
-						</div>
-					</div>
-					<button id="AddPhoto">Ajouter une photo</button>
+			<div class="popup-container-buttons">
+			<button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+			<button class="close-button"><i class="fa-solid fa-xmark"></i></button>
+		</div>
+		<div class="popup-wrapper">
+			<h3>Galerie photo</h3>
+			<div class="popup-add-photo-container">
+				<div class="popup-add-photo-header">
+					<i class="fa-regular fa-image"></i>
+					<button id="popup-add-photo-header-button">+ Ajouter photo</button>
+					<p>jpg, png: 4mo max</p>
+				</div>
+				<div class="popup-add-photo-content">
+					<label for="title">Titre</label>
+					<input type="text" id="title" name="title" required minlength="4" />
+					<label for="category">Catégorie</label>
+					<select name="categories" id="category">
+						<option value=""></option>
+						<option value="bbjets">Objets</option>
+						<option value="appartements">Appartements</option>
+						<option value="hotels">Hôtels & Restaurants</option>
+					</select>
 				</div>
 			</div>
+			<div class="popup-grid">
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="popup-card">
+					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+			</div>
+			<hr>
+			<button class="add-photo-button">Ajouter une photo</button>
 		</div>
+	</div>
+	</div>
 
 	<div id="edit-mode-header">
 		<button><i class="fa-regular fa-pen-to-square"></i> Mode édition</button>
@@ -96,7 +131,7 @@
 		<section id="portfolio">
 			<div id="portfolio-title">
 				<h2>Mes projets</h2>
-					<button class="edit-mode-button"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
+				<button class="edit-mode-button"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</div>
 			<div class="filter-bar padding-sides-mobile">
 				<button class="filter-button" data-filter="all">Tous</button>

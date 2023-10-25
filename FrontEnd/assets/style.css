@@ -75,31 +75,112 @@ body {
 	display: none;
 }
 
+.popup-container-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.back-button, .close-button {
+	border: none;
+	background-color: transparent;
+	font-size: 20px;
+	cursor: pointer;
+	margin: 0px 25px;
+}
+
 .popup-container {
 	background-color: white;
-	width: 45%;
-	height: 55%;
+	width: 43%;
+	height: 57%;
 	border-radius: 10px;
 	display: flex;
+	justify-content: center;
   	flex-direction: column;
   	align-items: center;
 }
 
 .popup-wrapper {
-width: 70%;
+	width: 68%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup-wrapper hr {
+	width: 100%;
+	margin-bottom: 35px;
 }
 
 .popup-container h3 {
-	margin-top: 70px;
-	margin-bottom: 50px;
+	margin: 10px 0px 50px 0px;
+}
+
+.popup-add-photo-container {
+	display: none;
+}
+
+.popup-add-photo-header {
+	background-color: #E8F1F6;
+	width: 100%;
+	height: 169px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 30px;
+}
+
+.popup-add-photo-header p {
+	margin-top: 8px;
+	font-family: 'Work Sans';
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 11px;
+}
+
+.fa-image {
+	color:#B9C5CC;
+	font-size: 76px;
+	margin-bottom: 8px;
+}
+
+#popup-add-photo-header-button {
+	width: 40%;
+	height: 36px;
+	border-radius: 50px;
+	border: none;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	font-family: 'Work Sans';
+
+}
+
+.popup-add-photo-content {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.popup-add-photo-content input, .popup-add-photo-content select{
+	width: 100%;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	margin: 15px 0px 20px 0px;
+	box-sizing: border-box;
 }
 
 .popup-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: repeat(5, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 	grid-column-gap: 10px;
-	grid-row-gap: 20px;
+	grid-row-gap: 25px;
+	margin-bottom: 60px;
 }
 
 .popup-card {
@@ -121,6 +202,22 @@ width: 70%;
   background-color: rgba(0,0,0,0.8);
   padding: 5px;
   border-radius: 2px;
+}
+
+.popup-card i {
+	cursor: pointer;
+}
+
+.add-photo-button {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: var(--primary-color);
+    width: 237px;
+	height: 36px;
+    border-radius: 60px;
+	border: none;
+	cursor: pointer;
 }
 
 main {
