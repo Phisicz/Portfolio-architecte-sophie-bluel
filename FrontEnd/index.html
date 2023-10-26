@@ -12,8 +12,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="/FrontEnd/assets/style.css">
-	<script defer src="/FrontEnd/index.js"></script>
+	<script defer src="/FrontEnd/works.js"></script>
+	<script defer src="/FrontEnd/categories.js"></script>
 	<script defer src="/FrontEnd/login.js"></script>
+	<script defer src="/FrontEnd/popup.js"></script>
 </head>
 
 <body>
@@ -105,8 +107,11 @@
 				<ul>
 					<li><a href="#portfolio">projets</a></li>
 					<li><a href="#contact">contact</a></li>
-					<li><a href="./login.html">login</a></li>
-					<li><img src="./assets/icons/instagram.png" alt="Instagram"><a href="https://instagram.com"></a>
+					<li id="connected"><a href="./login.html">login</a></li>
+					<li>
+						<a href="https://instagram.com" target="_blank">
+							<img src="./assets/icons/instagram.png" alt="Instagram">
+						</a>
 					</li>
 				</ul>
 			</nav>
@@ -134,65 +139,12 @@
 				<button class="edit-mode-button"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</div>
 			<div class="filter-bar padding-sides-mobile">
-				<button class="filter-button" data-filter="all">Tous</button>
-				<button class="filter-button" data-filter="objects">Objets</button>
-				<button class="filter-button" data-filter="apartments">Appartements</button>
-				<button class="filter-button" data-filter="hotels">Hôtels & Restaurants</button>
+				<button class="filter-button" category-id="0">Tous</button>
+				<button class="filter-button" category-id="1">Objets</button>
+				<button class="filter-button" category-id="2">Appartements</button>
+				<button class="filter-button" category-id="3">Hôtels & Restaurants</button>
 			</div>
 			<div class="gallery">
-				<figure>
-					<img src="assets/images/abajour-tahina.png" data-category="objects" alt="Abajour Tahina">
-					<figcaption>Abajour Tahina</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-v.png" data-category="apartments"
-						alt="Appartement Paris V">
-					<figcaption>Appartement Paris V</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/restaurant-sushisen-londres.png" data-category="hotels"
-						alt="Restaurant Sushisen - Londres">
-					<figcaption>Restaurant Sushisen - Londres</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/la-balisiere.png" data-category="hotels"
-						alt="Villa “La Balisiere” - Port Louis">
-					<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/structures-thermopolis.png" data-category="objects"
-						alt="Structures Thermopolis">
-					<figcaption>Structures Thermopolis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-x.png" data-category="apartments"
-						alt="Appartement Paris X">
-					<figcaption>Appartement Paris X</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/le-coteau-cassis.png" data-category="hotels"
-						alt="Pavillon “Le coteau” - Cassis">
-					<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/villa-ferneze.png" data-category="hotels"
-						alt="Villa Ferneze - Isola d’Elba">
-					<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/appartement-paris-xviii.png" data-category="apartments"
-						alt="Appartement Paris XVIII">
-					<figcaption>Appartement Paris XVIII</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/bar-lullaby-paris.png" data-category="hotels" alt="Bar “Lullaby” - Paris">
-					<figcaption>Bar “Lullaby” - Paris</figcaption>
-				</figure>
-				<figure>
-					<img src="assets/images/hotel-first-arte-new-delhi.png" data-category="hotels"
-						alt="Hotel First Arte - New Delhi">
-					<figcaption>Hotel First Arte - New Delhi</figcaption>
-				</figure>
 			</div>
 		</section>
 		<section id="contact">
