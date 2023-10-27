@@ -22,79 +22,41 @@
 	<div class="popup-overlay">
 		<div class="popup-container">
 			<div class="popup-container-buttons">
-			<button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
-			<button class="close-button"><i class="fa-solid fa-xmark"></i></button>
-		</div>
-		<div class="popup-wrapper">
-			<h3>Galerie photo</h3>
-			<div class="popup-add-photo-container">
-				<div class="popup-add-photo-header">
-					<i class="fa-regular fa-image"></i>
-					<button id="popup-add-photo-header-button">+ Ajouter photo</button>
-					<p>jpg, png: 4mo max</p>
-				</div>
-				<div class="popup-add-photo-content">
-					<label for="title">Titre</label>
-					<input type="text" id="title" name="title" required minlength="4" />
-					<label for="category">Catégorie</label>
-					<select name="categories" id="category">
-						<option value=""></option>
-						<option value="bbjets">Objets</option>
-						<option value="appartements">Appartements</option>
-						<option value="hotels">Hôtels & Restaurants</option>
-					</select>
-				</div>
+				<button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="close-button"><i class="fa-solid fa-xmark"></i></button>
 			</div>
-			<div class="popup-grid">
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
+			<div class="popup-wrapper">
+				<h3>Galerie photo</h3>
+				<form id="add-work-form">
+					<div class="add-work-header-container">
+						<div class="preview-photo-wrapper">
+							<img class="preview-photo" src="" alt="Prévisualitation de votre image">
+						</div>
+						<div class="add-work-header">
+							<i class="fa-regular fa-image"></i>
+							<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" />
+							<button id="add-work-header-button">+ Ajouter photo</button>
+							<p>jpg, png: 4mo max</p>
+						</div>
+					</div>
+					<div class="add-work-content">
+						<label for="title">Titre</label>
+						<input type="text" id="title" name="title" required minlength="4" />
+						<label for="category">Catégorie</label>
+						<select name="categories" id="category">
+							<option name=""></option>
+							<option value="1" name="Objets">Objets</option>
+							<option value="2" name="Appartements">Appartements</option>
+							<option value="3" name="Hôtels & Restaurants">Hôtels & Restaurants</option>
+						</select>
+					</div>
+				</form>
+				<div class="popup-grid">
 				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
-				<div class="popup-card">
-					<img src="/FrontEnd/assets/images/abajour-tahina.png" alt="Photo d'abajour">
-					<i class="fa-solid fa-trash-can"></i>
-				</div>
+				<hr>
+				<button class="add-photo-button">Ajouter une photo</button>
 			</div>
-			<hr>
-			<button class="add-photo-button">Ajouter une photo</button>
 		</div>
-	</div>
 	</div>
 
 	<div id="edit-mode-header">
@@ -139,10 +101,10 @@
 				<button class="edit-mode-button"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</div>
 			<div class="filter-bar padding-sides-mobile">
-				<button class="filter-button" category-id="0">Tous</button>
-				<button class="filter-button" category-id="1">Objets</button>
-				<button class="filter-button" category-id="2">Appartements</button>
-				<button class="filter-button" category-id="3">Hôtels & Restaurants</button>
+				<button class="filter-button" value="0">Tous</button>
+				<button class="filter-button" value="1">Objets</button>
+				<button class="filter-button" value="2">Appartements</button>
+				<button class="filter-button" value="3">Hôtels & Restaurants</button>
 			</div>
 			<div class="gallery">
 			</div>
