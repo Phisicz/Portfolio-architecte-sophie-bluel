@@ -1,5 +1,6 @@
 // Sélection des éléments DOM nécessaires.
 const popup = document.querySelector('.popup-overlay');
+const popupContainer = document.querySelector('.popup-container')
 const popupGrid = document.querySelector('.popup-grid');
 const popupAddWorkHeaderContainer = document.querySelector('.add-work-header-container');
 const popupTitle = document.querySelector('.popup-wrapper h3');
@@ -12,11 +13,16 @@ const addPhotoButton = document.querySelector('.add-photo-button');
 const addWorkForm = document.getElementById('add-work-form');
 const popupAddWorkHeaderButton = document.getElementById('add-work-header-button');
 const addWorkHeader = document.querySelector('.add-work-header');
-const previewPhotoWrapper = document.querySelector ('.preview-photo-wrapper');
+const previewPhotoWrapper = document.querySelector('.preview-photo-wrapper');
 const previewPhoto = document.querySelector(".preview-photo");
 const fileInputForm = document.getElementById('image');
 const titleInputForm = document.getElementById('title');
 const categoryInputForm = document.getElementById('category');
+const popupConfirmDeleteContainer = document.getElementById('popup-confirm-delete-container');
+const popupConfirmDelete = document.getElementById('popup-confirm-delete');
+const confirmButton = document.getElementById('confirm-button');
+const cancelButton = document.getElementById('cancel-button');
+
 
 // Récupération du token dans le localstorage pour l'authentification
 const token = localStorage.getItem('token');
@@ -30,20 +36,20 @@ async function uploadWork(file, title, category) {
     formData.append('category', category);
 
     // pas de content-type ici car formdata avec fetch est automatiquement défini sur multipart/form-data
-        const response = await fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: formData
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            console.log("Erreur lors de l'envoi du formulaire");
-        }
+    const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        console.log("Erreur lors de l'envoi du formulaire");
+    }
 }
 
 // Fonction asynchrone pour récupérer les travaux depuis l'API et les afficher dans le container spécifié
@@ -68,8 +74,9 @@ async function renderWorks(containerSelector) {
 
         const deleteButton = document.createElement('i');
         deleteButton.className = 'fa-regular fa-trash-can delete-button';
+        //confirmation modal avant de supprimer élément
         deleteButton.addEventListener('click', function () {
-            deleteWork(work.id);
+            popupConfirmDeleteContainer.style.display = 'block';
         });
 
         // Ajoute l'image à l'élément de travail
@@ -78,6 +85,28 @@ async function renderWorks(containerSelector) {
 
         // Ajoute l'élément de travail au conteneur
         container.appendChild(workElement);
+    });
+
+    // Gestionnaires d'événements pour les boutons de confirmation et d'annulation
+    confirmButton.addEventListener('click', function () {
+        // Code pour supprimer l'élément
+        deleteWork(works.id);
+
+        // Fermer la modal de confirmation
+        popupConfirmDeleteContainer.style.display = 'none';
+    });
+
+    cancelButton.addEventListener('click', function () {
+        // Fermer la popup de confirmation sans supprimer l'élément
+        popupConfirmDeleteContainer.style.display = 'none';
+    });
+
+    // Fermeture modal si clic en dehors de la fenetre
+    popupConfirmDeleteContainer.addEventListener('click', function (event) {
+        // Vérifie si l'élément cliqué est le container ou un de ses enfants
+        if (!popupConfirmDelete.contains(event.target)) {
+            popupConfirmDeleteContainer.style.display = 'none';
+        }
     });
 }
 
@@ -93,6 +122,7 @@ async function deleteWork(id) {
     if (response.ok) {
         renderWorks('.popup-grid'); // Rafraîchir la grille
     }
+
 }
 
 // Supprimer/afficher des éléments en fonction des étapes de la popup
@@ -119,7 +149,8 @@ const openPopup = () => {
 const closePopup = () => {
     popup.style.display = 'none';
     resetPopup();
-}
+};
+
 
 const resetPopup = () => {
     popupTitle.innerText = "Galerie photo";
@@ -160,12 +191,42 @@ function triggerFileInput() {
     fileInputForm.click();
 }
 
+//Verification du fichier image
+function validateFileTypeAndSize(fileInput) {
+    const file = fileInput.files[0];
+
+    if (file) {
+        const fileType = file['type'];
+        const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+        const fileSize = file.size / 1024 / 1024; //file.size (octets) / 1024 (Ko) / 1024 (Mo), on peut encore rajouter /1024 pour les Go
+
+        if (!validImageTypes.includes(fileType)) {
+            alert('Veuillez sélectionner un fichier de type jpg ou png.');
+            fileInput.value = '';
+            return false;
+        }
+
+        if (fileSize > 4) {
+            alert('La taille du fichier ne doit pas dépasser 4 Mo.');
+            fileInput.value = '';
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 // Obliger user à remplir le form et rendre le bouton "valider" inutilisable dans le cas contraire
 function validateForm() {
     // Initialisation des données de formulaire
     const file = fileInputForm.files[0];
     const title = titleInputForm.value;
     const category = categoryInputForm.value;
+
+    //Appel de la fonction de la verification fichier image
+    if (!validateFileTypeAndSize(fileInputForm)) {
+        return;
+    }
 
     //Bouton qui reste désactivé tant que l'utilisateur ne remplit pas les informations
     if (file && title && category) {
@@ -184,7 +245,7 @@ function validateForm() {
         popupAddWorkHeaderContainer.style.display = "flex";
         popupAddWorkHeaderContainer.style.justifyContent = "center";
         const preview = new FileReader();
-        preview.onload = function(event) {
+        preview.onload = function (event) {
             previewPhoto.src = event.target.result;
         };
         preview.readAsDataURL(file);
@@ -193,7 +254,7 @@ function validateForm() {
     }
 
     // Ajout de l'écouteur d'événements pour le bouton d'ajout de photo
-    addPhotoButton.addEventListener('click', async function() {
+    addPhotoButton.addEventListener('click', async function () {
         if (file && title && category) {
             const result = await uploadWork(file, title, category);
             if (result) {
@@ -203,7 +264,6 @@ function validateForm() {
         }
     });
 }
-
 
 // Ajoute des écouteurs d'événements aux boutons.
 editModeButton.addEventListener('click', openPopup);

@@ -76,6 +76,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (editButton) {
             editButton.style.display = "block";
         }
+        //Masquer Filter Bar
+        const filterBar = document.querySelector('.filter-bar');
+        if (filterBar) {
+            filterBar.style.display = 'none';
+        }
     }
 });
 
