@@ -83,7 +83,10 @@ works.forEach((work) => {
         deleteButton.className = 'fa-regular fa-trash-can delete-button';
         //confirmation modal avant de supprimer élément
         deleteButton.addEventListener('click', function () {
+<<<<<<< HEAD
             currentWorkId = work.id; // Stockez l'ID du travail actuel
+=======
+>>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
             popupConfirmDeleteContainer.style.display = 'block';
         });
 
@@ -103,6 +106,28 @@ works.forEach((work) => {
             currentWorkId = null;
             popupConfirmDeleteContainer.style.display = 'none';
         }
+    });
+
+    cancelButton.addEventListener('click', function () {
+        // Fermer la popup de confirmation sans supprimer l'élément
+        popupConfirmDeleteContainer.style.display = 'none';
+    });
+
+    // Fermeture modal si clic en dehors de la fenetre
+    popupConfirmDeleteContainer.addEventListener('click', function (event) {
+        // Vérifie si l'élément cliqué est le container ou un de ses enfants
+        if (!popupConfirmDelete.contains(event.target)) {
+            popupConfirmDeleteContainer.style.display = 'none';
+        }
+    });
+
+    // Gestionnaires d'événements pour les boutons de confirmation et d'annulation
+    confirmButton.addEventListener('click', function () {
+        // Code pour supprimer l'élément
+        deleteWork(works.id);
+
+        // Fermer la modal de confirmation
+        popupConfirmDeleteContainer.style.display = 'none';
     });
 
     cancelButton.addEventListener('click', function () {
@@ -227,14 +252,20 @@ function validateFileTypeAndSize(fileInput) {
     return false;
 }
 
+<<<<<<< HEAD
 // Ajout de l'écouteur d'événements pour le bouton d'ajout de photo
 addPhotoButton.addEventListener('click', async function () {
     replacePopup()
+=======
+// Obliger user à remplir le form et rendre le bouton "valider" inutilisable dans le cas contraire
+function validateForm() {
+>>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
     // Initialisation des données de formulaire
     const file = fileInputForm.files[0];
     const title = titleInputForm.value;
     const category = categoryInputForm.value;
 
+<<<<<<< HEAD
     if (file && title && category) {
         const result = await uploadWork(file, title, category);
         if (result) {
@@ -252,6 +283,8 @@ function validateForm() {
     const title = titleInputForm.value;
     const category = categoryInputForm.value;
 
+=======
+>>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
     //Appel de la fonction de la verification fichier image
     if (!validateFileTypeAndSize(fileInputForm)) {
         return;
@@ -281,12 +314,28 @@ function validateForm() {
     } else {
         previewPhoto.style.display = "none";
     }
+<<<<<<< HEAD
 }
 
 fileInputForm.onchange = validateForm;
 titleInputForm.onkeyup = validateForm;
 categoryInputForm.onchange = validateForm;
 
+=======
+
+    // Ajout de l'écouteur d'événements pour le bouton d'ajout de photo
+    addPhotoButton.addEventListener('click', async function () {
+        if (file && title && category) {
+            const result = await uploadWork(file, title, category);
+            if (result) {
+                console.log("Travail ajouté avec succès: ", result);
+                renderWorks(".popup-grid"); // mise à jour de l'affichage
+            }
+        }
+    });
+}
+
+>>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
 // Ajoute des écouteurs d'événements aux boutons.
 editModeButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup);
