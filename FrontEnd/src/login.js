@@ -26,7 +26,7 @@ async function seConnecter(email, password) {
 document.addEventListener('DOMContentLoaded', (event) => {
     //Redirection Accueil en cliquant sur le logo
     document.getElementById('logo-header').addEventListener('click', function() {
-        window.location.href = '/FrontEnd/index.html';
+        window.location.href = '/index.html';
     });
 document.querySelector('form').addEventListener('submit', async (event) => {
     //console.log("Début de l'événement submit");
@@ -42,7 +42,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
         console.log("Login object:", login);
         console.log("Stored token:", localStorage.getItem('token'));
         //console.log("Redirection vers index.html");
-        window.location.href = '/FrontEnd/index.html';
+        window.location.href = '/index.html';
     } else {
         //console.log("Affichage du message d'erreur");
         document.getElementById('login-error').style.display = 'flex';
@@ -75,6 +75,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const editButton = document.querySelector('.edit-mode-button');
         if (editButton) {
             editButton.style.display = "block";
+        }
+        //Masquer Filter Bar
+        const filterBar = document.querySelector('.filter-bar');
+        if (filterBar) {
+            filterBar.style.display = 'none';
         }
     }
 });

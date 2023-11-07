@@ -31,28 +31,6 @@ async function renderWorks() {
     workElement.appendChild(titleElement);
     container.appendChild(workElement);
   });
-
-  // Ajoutez les écouteurs d'événements pour les boutons de filtrage
-  const filterButtons = document.querySelectorAll('.filter-button');
-  filterButtons.forEach((button) => {
-    button.addEventListener('click', filterWorks);
-  });
-}
-
-// Filtrer les travaux en fonction de la catégorie
-function filterWorks(event) {
-  const categoryId = event.target.value;
-  const works = document.querySelectorAll('figure');
-
-  // Parcourir tous les éléments de la galerie pour les afficher ou les masquer
-  works.forEach((work) => {
-    const workCategoryId = work.getAttribute('category-id');
-    if (categoryId === '0' || workCategoryId === categoryId) {
-      work.style.display = 'block';
-    } else {
-      work.style.display = 'none';
-    }
-  });
 }
 
 // Appelez la fonction pour afficher les travaux dynamiquement

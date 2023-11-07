@@ -11,15 +11,24 @@
 		rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="/FrontEnd/assets/style.css">
-	<script defer src="/FrontEnd/works.js"></script>
-	<script defer src="/FrontEnd/categories.js"></script>
-	<script defer src="/FrontEnd/login.js"></script>
-	<script defer src="/FrontEnd/popup.js"></script>
+	<link rel="stylesheet" href="/assets/style.css">
 </head>
 
 <body>
 	<div class="popup-overlay">
+		<div id="popup-confirm-delete-container">
+			<div id="popup-confirm-delete">
+				<p>
+					Êtes-vous sûr de vouloir supprimer cet élément ?
+				</p>
+				<button id="confirm-button">
+					Oui
+				</button>
+				<button id="cancel-button">
+					Non
+				</button>
+			</div>
+		</div>
 		<div class="popup-container">
 			<div class="popup-container-buttons">
 				<button class="back-button"><i class="fa-solid fa-arrow-left"></i></button>
@@ -69,10 +78,10 @@
 				<ul>
 					<li><a href="#portfolio">projets</a></li>
 					<li><a href="#contact">contact</a></li>
-					<li id="connected"><a href="./login.html">login</a></li>
+					<li id="connected"><a href="/login.html">login</a></li>
 					<li>
 						<a href="https://instagram.com" target="_blank">
-							<img src="./assets/icons/instagram.png" alt="Instagram">
+							<img src="/assets/icons/instagram.png" alt="Instagram">
 						</a>
 					</li>
 				</ul>
@@ -81,8 +90,8 @@
 	</div>
 	<main>
 		<section id="introduction">
-			<figure>
-				<img src="./assets/images/sophie-bluel.png" alt="">
+			<figure class="introduction-header-image">
+				<img src="/assets/images/sophie-bluel.png" alt="">
 			</figure>
 			<article class="padding-sides-mobile">
 				<h2>Designer d'espace</h2>
@@ -101,10 +110,6 @@
 				<button class="edit-mode-button"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
 			</div>
 			<div class="filter-bar padding-sides-mobile">
-				<button class="filter-button" value="0">Tous</button>
-				<button class="filter-button" value="1">Objets</button>
-				<button class="filter-button" value="2">Appartements</button>
-				<button class="filter-button" value="3">Hôtels & Restaurants</button>
 			</div>
 			<div class="gallery">
 			</div>
@@ -131,6 +136,10 @@
 			</ul>
 		</nav>
 	</footer>
+	<script defer src="/src/works.js"></script>
+	<script defer src="/src/categories.js"></script>
+	<script defer src="/src/login.js"></script>
+	<script defer src="/src/popup.js"></script>
 </body>
 
 </html>
