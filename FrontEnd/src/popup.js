@@ -129,7 +129,6 @@ async function deleteWork(id) {
     });
 
     if (response.ok) {
-        await renderWorks('.popup-grid', true); // Rafraîchir la grille popup
         await renderWorks('.gallery', false); // Rafraîchir la grille homepage
         closePopup();
     }
@@ -150,19 +149,36 @@ function popupStep(step) {
     }
 }
 
-// Gérer ouverture/fermeture/reset de la popup
-const openPopup = () => {
+// Fonction qui gère les clics dedans ou en dehors de la popup
+function popupClick(event) {
+    // Vérifie si le clic n'est pas sur la popup et pas sur un descendant de la popup
+    if (!popupContainer.contains(event.target)) {
+        closePopup();
+    }
+}
+
+// Gérer ouverture de la popup
+const openPopup = (event) => {
     popup.style.display = "flex";
     renderWorks(".popup-grid", true);
     popupStep(1);
+
+    // Ajout d'un event listener lorsque la popup est ouverte afin de vérifier si l'user clique en dehors
+    // Utilise `capture` pour s'assurer que ce listener s'exécute avant les event listener de l'intérieur de la popup
+    window.addEventListener('click', popupClick, { capture: true });
 };
 
+// Gérer fermeture de la popup
 const closePopup = () => {
     popup.style.display = 'none';
     resetPopup();
+
+    // Suppression de l'event listener si la popup est fermée
+    window.removeEventListener('click', popupClick, { capture: true });
 };
 
 
+// Gérer reinitialisation de la popup
 const resetPopup = () => {
     popupTitle.innerText = "Galerie photo";
     popupGrid.style.display = "grid";
@@ -186,6 +202,8 @@ const replacePopup = () => {
     popupTitle.innerText = "Ajout photo";
     popupGrid.style.display = "none";
     addPhotoButton.innerText = "Valider";
+    addPhotoButton.style.backgroundColor = "#A7A7A7";
+    addPhotoButton.disabled = true;
     previewPhotoWrapper.style.display = "none";
     popupStep(2);
 };
@@ -240,7 +258,6 @@ addPhotoButton.addEventListener('click', async function () {
         if (result) {
             console.log("Travail ajouté avec succès: ", result);
             await renderWorks(".gallery", false); // mise à jour affichage grille homepage
-            await renderWorks(".popup-grid", true); // mise à jour affichage grille popup
             closePopup();
         }
     }

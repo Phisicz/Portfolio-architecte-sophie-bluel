@@ -160,10 +160,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-<<<<<<< HEAD
 	z-index: 3;
-=======
->>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
 	display: none;
 }
 
@@ -223,20 +220,12 @@ body {
 
 .popup-container {
 	background-color: white;
-<<<<<<< HEAD
-=======
-	width: 45%;
-	height: 45%;
->>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
 	border-radius: 10px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-<<<<<<< HEAD
 	padding: 40px 100px;
-=======
->>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
 }
 
 .popup-wrapper {
@@ -347,13 +336,8 @@ body {
 }
 
 .popup-card img {
-<<<<<<< HEAD
 	width: 77px;
-=======
-	width: 100%;
->>>>>>> e0b180c931e528ea73b36e90210922410f5958b1
 	height: 103px;
-
 }
 
 .delete-button {
@@ -593,6 +577,7 @@ li:hover {
 .gallery img {
 	width: 100%;
 	height: 407px;
+	object-fit: cover;
 }
 
 
