@@ -39,24 +39,24 @@
 				<form id="add-work-form">
 					<div class="add-work-header-container">
 						<div class="preview-photo-wrapper">
-							<img class="preview-photo" src="" alt="Prévisualitation de votre image">
+							<img class="preview-photo" alt="Prévisualitation de votre image">
 						</div>
 						<div class="add-work-header">
 							<i class="fa-regular fa-image"></i>
-							<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" />
+							<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
 							<button id="add-work-header-button">+ Ajouter photo</button>
 							<p>jpg, png: 4mo max</p>
 						</div>
 					</div>
 					<div class="add-work-content">
 						<label for="title">Titre</label>
-						<input type="text" id="title" name="title" required minlength="4" />
+						<input type="text" id="title" name="title" required minlength="4">
 						<label for="category">Catégorie</label>
 						<select name="categories" id="category">
-							<option name=""></option>
-							<option value="1" name="Objets">Objets</option>
-							<option value="2" name="Appartements">Appartements</option>
-							<option value="3" name="Hôtels & Restaurants">Hôtels & Restaurants</option>
+							<option id=""></option>
+							<option value="1" id="Objets">Objets</option>
+							<option value="2" id="Appartements">Appartements</option>
+							<option value="3" id="Hôtels & Restaurants">Hôtels & Restaurants</option>
 						</select>
 					</div>
 				</form>

@@ -29,25 +29,29 @@ const token = localStorage.getItem('token');
 
 // Permetre à l'utilisateur d'ajouter un nouveau travail à l'API
 async function uploadWork(file, title, category) {
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title', title);
-    formData.append('category', category);
+    try {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('title', title);
+        formData.append('category', category);
 
-    // pas de content-type ici car formdata avec fetch est automatiquement défini sur multipart/form-data
-    const response = await fetch('http://localhost:5678/api/works', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        },
-        body: formData
-    });
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
 
-    if (response.ok) {
-        const data = await response.json();
-        return data;
-    } else {
-        console.log("Erreur lors de l'envoi du formulaire");
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            console.log("Erreur lors de l'envoi du formulaire");
+        }
+    } catch (error) {
+        // Erreur
+        console.error("Une erreur est survenue lors de l'upload du travail:", error);
     }
 }
 
@@ -56,83 +60,97 @@ let currentWorkId = null;
 
 // Fonction asynchrone pour récupérer les travaux depuis l'API et les afficher dans le container spécifié
 async function renderWorks(containerSelector, showDeleteButton) {
-    // Utilisation d'une fonction asynchrone getWorks() pour récupérer les travaux
-    const works = await getWorks();
+    try {
+        // Utilisation d'une fonction asynchrone getWorks() pour récupérer les travaux
+        const works = await getWorks();
 
-    // Sélectionne le conteneur où les travaux seront affichés
-    const container = document.querySelector(containerSelector);
+        // Sélectionne le conteneur où les travaux seront affichés
+        const container = document.querySelector(containerSelector);
 
-    // Vide le conteneur existant
-    container.innerHTML = '';
+        // Vide le conteneur existant
+        container.innerHTML = '';
 
-    // Parcoure chaque travail et crée un élément pour lui
-works.forEach((work) => {
-    const workElement = document.createElement('div');
-    workElement.className = 'popup-card';
+        // Parcoure chaque travail et crée un élément pour lui
+        works.forEach((work) => {
+            const workElement = document.createElement('div');
+            workElement.className = 'popup-card';
 
-    const imageElement = document.createElement('img');
-    imageElement.src = work.imageUrl;
-    imageElement.alt = work.title;
+            const imageElement = document.createElement('img');
+            imageElement.src = work.imageUrl;
+            imageElement.alt = work.title;
 
-    // Ajoute l'image à l'élément de travail
-    workElement.appendChild(imageElement);
+            // Ajoute l'image à l'élément de travail
+            workElement.appendChild(imageElement);
 
-    // Créez et ajoutez le bouton de suppression uniquement si showDeleteButton est true
-    if (showDeleteButton) {
-        const deleteButton = document.createElement('i');
-        deleteButton.className = 'fa-regular fa-trash-can delete-button';
-        //confirmation modal avant de supprimer élément
-        deleteButton.addEventListener('click', function () {
-            currentWorkId = work.id; // Stockez l'ID du travail actuel
-            popupConfirmDeleteContainer.style.display = 'block';
+            // Créez et ajoutez le bouton de suppression uniquement si showDeleteButton est true
+            if (showDeleteButton) {
+                const deleteButton = document.createElement('i');
+                deleteButton.className = 'fa-regular fa-trash-can delete-button';
+                //confirmation modal avant de supprimer élément
+                deleteButton.addEventListener('click', function () {
+                    currentWorkId = work.id; // Stockez l'ID du travail actuel
+                    popupConfirmDeleteContainer.style.display = 'block';
+                });
+
+                workElement.appendChild(deleteButton);
+            }
+
+            // Ajoute l'élément de travail au conteneur
+            container.appendChild(workElement);
         });
-
-        workElement.appendChild(deleteButton);
+    } catch (error) {
+        console.error("Une erreur est survenue lors du rendu des travaux:", error);
+        // Gérer l'erreur ici, par exemple en affichant un message d'erreur à l'utilisateur
     }
+}
 
-    // Ajoute l'élément de travail au conteneur
-    container.appendChild(workElement);
+// Gestionnaires d'événements pour les boutons de confirmation et d'annulation
+confirmButton.addEventListener('click', function () {
+    if (currentWorkId) {
+        // Utilisez l'ID stocké pour supprimer le travail
+        deleteWork(currentWorkId);
+        // Réinitialisez l'ID après la suppression
+        currentWorkId = null;
+        popupConfirmDeleteContainer.style.display = 'none';
+    }
 });
 
-    // Gestionnaires d'événements pour les boutons de confirmation et d'annulation
-    confirmButton.addEventListener('click', function () {
-        if (currentWorkId) {
-            // Utilisez l'ID stocké pour supprimer le travail
-            deleteWork(currentWorkId);
-            // Réinitialisez l'ID après la suppression
-            currentWorkId = null;
-            popupConfirmDeleteContainer.style.display = 'none';
-        }
-    });
+cancelButton.addEventListener('click', function (event) {
+    // Fermer la popup de confirmation sans supprimer l'élément
+    popupConfirmDeleteContainer.style.display = 'none';
+    openPopup();
+});
 
-    cancelButton.addEventListener('click', function () {
-        // Fermer la popup de confirmation sans supprimer l'élément
+// Fermeture modal si clic en dehors de la fenetre
+popupConfirmDeleteContainer.addEventListener('click', function (event) {
+    // Vérifie si l'élément cliqué est le container ou un de ses enfants
+    if (!popupConfirmDelete.contains(event.target)) {
         popupConfirmDeleteContainer.style.display = 'none';
-    });
-
-    // Fermeture modal si clic en dehors de la fenetre
-    popupConfirmDeleteContainer.addEventListener('click', function (event) {
-        // Vérifie si l'élément cliqué est le container ou un de ses enfants
-        if (!popupConfirmDelete.contains(event.target)) {
-            popupConfirmDeleteContainer.style.display = 'none';
-        }
-    });
-}
+        openPopup();
+    }
+});
 
 // Fonction pour supprimer un travail
 async function deleteWork(id) {
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            await renderWorks('.gallery', false); // Assurez-vous que renderWorks() gère aussi les erreurs correctement
+            closePopup();
+        } else {
+            console.log("Erreur lors de la suppression du travail");
+            // Gérer les réponses non-OK ici, par exemple en affichant un message d'erreur à l'utilisateur
         }
-    });
-
-    if (response.ok) {
-        await renderWorks('.gallery', false); // Rafraîchir la grille homepage
-        closePopup();
+    } catch (error) {
+        console.error("Une erreur est survenue lors de la suppression du travail:", error);
+        // Gérer l'erreur ici, par exemple en affichant un message d'erreur à l'utilisateur
     }
-
 }
 
 // Supprimer/afficher des éléments en fonction des étapes de la popup
@@ -246,20 +264,27 @@ function validateFileTypeAndSize(fileInput) {
 }
 
 // Ajout de l'écouteur d'événements pour le bouton d'ajout de photo
-addPhotoButton.addEventListener('click', async function () {
-    replacePopup()
-    // Initialisation des données de formulaire
+addPhotoButton.addEventListener('click', async function (event) {
+    event.preventDefault(); // Empêche le formulaire de soumettre par défaut
+    replacePopup();
+    
+    // Déclarer et initialiser les variables du formulaire
     const file = fileInputForm.files[0];
     const title = titleInputForm.value;
     const category = categoryInputForm.value;
 
-    if (file && title && category) {
-        const result = await uploadWork(file, title, category);
-        if (result) {
-            console.log("Travail ajouté avec succès: ", result);
-            await renderWorks(".gallery", false); // mise à jour affichage grille homepage
-            closePopup();
+    try {
+        if (file && title && category) {
+            const result = await uploadWork(file, title, category);
+            if (result) {
+                console.log("Travail ajouté avec succès: ", result);
+                await renderWorks(".gallery", false);
+                closePopup();
+            }
         }
+    } catch (error) {
+        console.error("Une erreur est survenue lors de l'ajout d'une photo:", error);
+        // Gérer l'erreur ici
     }
 });
 

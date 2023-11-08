@@ -1,8 +1,17 @@
 // Fonction pour récupérer les catégories depuis l'API
 async function getCategories() {
-    const response = await fetch('http://localhost:5678/api/categories');
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch('http://localhost:5678/api/categories');
+        if (!response.ok) {
+            throw new Error("La réponse du réseau n'était pas correcte.");
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        // Erreur
+        console.error("Une erreur est survenue lors de la récupération des catégories:", error);
+        return [];
+    }
 }
 
 //Création des boutons de la filter bar
