@@ -18,10 +18,8 @@ async function getCategories() {
 async function renderFilterBar() {
     // Récupérez les catégories depuis l'API
     const categories = await getCategories();
-
     // Sélectionnez le conteneur des boutons de filtrage
     const filterBar = document.querySelector('.filter-bar');
-
     // Créez un bouton "Tous" et ajoutez-le à la barre de filtre
     const allButton = document.createElement('button');
     allButton.className = 'filter-button';
@@ -36,10 +34,8 @@ async function renderFilterBar() {
         button.className = 'filter-button';
         button.textContent = category.name;
         button.value = category.id;
-
         // Ajoutez un écouteur d'événements pour le filtrage des travaux
         button.addEventListener('click', filterWorks);
-
         // Ajoutez le bouton au conteneur
         filterBar.appendChild(button);
     });
@@ -52,7 +48,6 @@ renderFilterBar();
 function filterWorks(event) {
     const categoryId = event.target.value;
     const works = document.querySelectorAll('figure:not(.introduction-header-image)');
-
     // Parcourir tous les éléments de la galerie pour les afficher ou les masquer
     works.forEach((work) => {
         const workCategoryId = work.getAttribute('category-id');

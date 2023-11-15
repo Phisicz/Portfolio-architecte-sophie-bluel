@@ -21,11 +21,10 @@ const popupConfirmDeleteContainer = document.getElementById('popup-confirm-delet
 const popupConfirmDelete = document.getElementById('popup-confirm-delete');
 const confirmButton = document.getElementById('confirm-button');
 const cancelButton = document.getElementById('cancel-button');
-
+const fileInfo = document.getElementById('add-work-header-file-info');
 
 // Récupération du token dans le localstorage pour l'authentification
 const token = localStorage.getItem('token');
-
 
 // Permetre à l'utilisateur d'ajouter un nouveau travail à l'API
 async function uploadWork(file, title, category) {
@@ -63,22 +62,17 @@ async function renderWorks(containerSelector, showDeleteButton) {
     try {
         // Utilisation d'une fonction asynchrone getWorks() pour récupérer les travaux
         const works = await getWorks();
-
         // Sélectionne le conteneur où les travaux seront affichés
         const container = document.querySelector(containerSelector);
-
         // Vide le conteneur existant
         container.innerHTML = '';
-
         // Parcoure chaque travail et crée un élément pour lui
         works.forEach((work) => {
             const workElement = document.createElement('div');
             workElement.className = 'popup-card';
-
             const imageElement = document.createElement('img');
             imageElement.src = work.imageUrl;
             imageElement.alt = work.title;
-
             // Ajoute l'image à l'élément de travail
             workElement.appendChild(imageElement);
 
@@ -91,10 +85,8 @@ async function renderWorks(containerSelector, showDeleteButton) {
                     currentWorkId = work.id; // Stockez l'ID du travail actuel
                     popupConfirmDeleteContainer.style.display = 'block';
                 });
-
                 workElement.appendChild(deleteButton);
             }
-
             // Ajoute l'élément de travail au conteneur
             container.appendChild(workElement);
         });
@@ -180,7 +172,6 @@ const openPopup = (event) => {
     popup.style.display = "flex";
     renderWorks(".popup-grid", true);
     popupStep(1);
-
     // Ajout d'un event listener lorsque la popup est ouverte afin de vérifier si l'user clique en dehors
     // Utilise `capture` pour s'assurer que ce listener s'exécute avant les event listener de l'intérieur de la popup
     window.addEventListener('click', popupClick, { capture: true });
@@ -190,7 +181,6 @@ const openPopup = (event) => {
 const closePopup = () => {
     popup.style.display = 'none';
     resetPopup();
-
     // Suppression de l'event listener si la popup est fermée
     window.removeEventListener('click', popupClick, { capture: true });
 };
@@ -203,15 +193,12 @@ const resetPopup = () => {
     popupAddWorkHeaderContainer.style.display = 'block';
     popupStep(1);
     resetButton();
-
     // Reset la preview de l'image si l'user ferme la popup et la réouvre
     const previewPhoto = document.querySelector(".preview-photo");
     previewPhoto.style.display = "none";
     previewPhoto.src = "";
-
     // Reset le file input de l'image
     fileInputForm.value = "";
-
     // Remet le header photo d'origine
     addWorkHeader.style.display = "flex"
 };
@@ -224,6 +211,7 @@ const replacePopup = () => {
     addPhotoButton.disabled = true;
     previewPhotoWrapper.style.display = "none";
     popupStep(2);
+    categoriesDropdown();
 };
 
 // Reset le bouton si l'user ferme la popup et la réouvre
@@ -241,20 +229,19 @@ function triggerFileInput() {
 //Verification du fichier image
 function validateFileTypeAndSize(fileInput) {
     const file = fileInput.files[0];
-
     if (file) {
         const fileType = file['type'];
         const validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
         const fileSize = file.size / 1024 / 1024; //file.size (octets) / 1024 (Ko) / 1024 (Mo), on peut encore rajouter /1024 pour les Go
-
         if (!validImageTypes.includes(fileType)) {
-            alert('Veuillez sélectionner un fichier de type jpg ou png.');
+            fileInfo.innerText = "Veuillez sélectionner un fichier de type jpg ou png.";
+            fileInfo.style.color = 'red';
             fileInput.value = '';
             return false;
         }
-
         if (fileSize > 4) {
-            alert('La taille du fichier ne doit pas dépasser 4 Mo.');
+            fileInfo.innerText = "La taille du fichier ne doit pas dépasser 4 Mo.";
+            fileInfo.style.color = 'red';
             fileInput.value = '';
             return false;
         }
@@ -267,7 +254,6 @@ function validateFileTypeAndSize(fileInput) {
 addPhotoButton.addEventListener('click', async function (event) {
     event.preventDefault(); // Empêche le formulaire de soumettre par défaut
     replacePopup();
-    
     // Déclarer et initialiser les variables du formulaire
     const file = fileInputForm.files[0];
     const title = titleInputForm.value;
@@ -287,6 +273,20 @@ addPhotoButton.addEventListener('click', async function (event) {
         // Gérer l'erreur ici
     }
 });
+
+// Récupérer les catégories dynamiquement et les crééer dans un élément select
+async function categoriesDropdown() {
+    const categories = await getCategories();
+    const categorySelect = document.getElementById('category');
+    categorySelect.innerHTML = '<option value=""></option>'; // Réinitialisez la liste
+
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        categorySelect.appendChild(option);
+    });
+}
 
 // Obliger user à remplir le form et rendre le bouton "valider" inutilisable dans le cas contraire
 function validateForm() {

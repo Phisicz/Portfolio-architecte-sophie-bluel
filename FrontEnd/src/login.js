@@ -10,8 +10,6 @@ async function seConnecter(email, password) {
             body: JSON.stringify({ email, password })
         });
 
-        console.log("Réponse reçue", response);
-
         if (response.ok) {
             const login = await response.json();
             if (login.userId && login.token) {
@@ -36,13 +34,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.querySelector('form').addEventListener('submit', async (event) => {
     //console.log("Début de l'événement submit");
     event.preventDefault();
-
     const email = document.querySelector('input[type="email"]').value;
     const password = document.querySelector('input[type="password"]').value;
-
+    
     try {
         const loginSuccessful = await seConnecter(email, password);
-
         if (loginSuccessful) {
             console.log("Connexion réussie");
             window.location.href = '/index.html';
@@ -67,7 +63,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     if (token) {
         // L'utilisateur est connecté
-
         // Changement onglet login
         const connected = document.getElementById('connected');
         if (connected) {
@@ -92,11 +87,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 //USER SE DECONNECTE
-
 document.getElementById('connected').addEventListener('click', function() {
     // Supprimer le token du localStorage
     localStorage.removeItem('token');
-    
     // Recharger la page sans token afin de pouvoir se reconnecter
     window.location.href = 'index.html';
 });
