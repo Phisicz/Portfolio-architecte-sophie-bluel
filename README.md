@@ -1,6 +1,6 @@
 # 🚀 Portfolio - architecte Sophie Bluel (P3 - Openclassrooms) 🚀
 
-Voici ma proposition de la **Homepage Booki** ! 👋
+Voici ma proposition du **portfolio de l'architecte Sophie Bluel** ! 👋
 
 ⬇️ Lien pour y accéder ⬇️
 https://phisicz.github.io/portfolio-architecte-sophie-bluel
